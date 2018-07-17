@@ -13,7 +13,7 @@ const configVars = require("./config/keys");
 mongoose
   .connect(
     configVars.MONGODB_URL,
-    console.log("Database successfully connected")
+    console.log("Database successfully connected", configVars.MONGODB_URL)
   )
   .catch(err => {
     console.log("Database connection failed. Server will be shutted down");
@@ -46,5 +46,14 @@ app.use((req, res) => {
     message: error.message
   });
 });
+
+// Server static assets if in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 module.exports = app;
