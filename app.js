@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 //app.get('/', (req, res) => res.status(200).json({message: 'top route'}));
 app.use("/users", userRoutes);
 app.use("/surveys", surveyRoutes);
-
+/* 
 // 404 Error handler - If the provided route can't be resolved this
 // is the middleware catching the error
 app.use((req, res, next) => {
@@ -46,7 +46,7 @@ app.use((req, res) => {
     message: error.message
   });
 });
-
+ */
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
